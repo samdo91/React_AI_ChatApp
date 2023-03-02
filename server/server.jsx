@@ -4,12 +4,6 @@ const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
 app.use(cors());
-const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-  apiKey: `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`,
-});
-const openai = new OpenAIApi(configuration);
 
 const server = http.createServer(app);
 
