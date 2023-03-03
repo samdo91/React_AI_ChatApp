@@ -1,0 +1,23 @@
+[33mcommit d2cc3c1588845b60bafa3b4e470e7e03e58b1024[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: samdo91 <fkdlzkfka@naver.com>
+Date:   Fri Mar 3 02:06:17 2023 +0800
+
+    user-agent
+
+[33mcommit 1ee7eebfd944baa2a70957db5d2c9fc47cd8f5e4[m
+Author: samdo91 <fkdlzkfka@naver.com>
+Date:   Fri Mar 3 01:07:38 2023 +0800
+
+    거의다 왔다고 생각한다. 문제는 user-agent가 뜬다는 거다. 이게 뭔지를 모르겠다. 내일은 엑시오스를 써보자.
+
+[33mcommit 6a47c648d5f186a3ac42234614230c7643357ff2[m
+Author: samdo91 <fkdlzkfka@naver.com>
+Date:   Thu Mar 2 22:30:14 2023 +0800
+
+    소켓io와 ai가 전혀 다른 이야기라는 걸 꺠닳았다. ai는 그냥 api를 가져와서 만들면 되는 것었다. 그래서 두개의 모드를 만들것이다. 소켓io를 통한 채팅은 모두 구축되었다. 그냥 모드만 바꾸면 될거 같다. 애초에 생각한거랑 많이 다르지만 뭐..
+
+[33mcommit 99734430643111b400311dc311d870a14c5906b8[m
+Author: samdo91 <fkdlzkfka@naver.com>
+Date:   Wed Mar 1 16:57:33 2023 +0800
+
+    일단 채팅 베이스는 다 만듬 이제 남은건 ai를 탑재하는 거랑 css를 다듬는 것이다. ai는 오픈 API를 사용할 것

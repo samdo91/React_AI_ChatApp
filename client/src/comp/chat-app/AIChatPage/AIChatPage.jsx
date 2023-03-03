@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { myNames, herNames, messageLists } from "../../store/global/index";
 import { useAtom } from "jotai";
 import { Configuration, OpenAIApi } from "openai";
+import AiChatBoard from "./AiChatBoard/AiChatBoard";
 // const { Configuration, OpenAIApi } = require("openai");
 
 // import slack from "@slack/web-api";
@@ -12,7 +13,7 @@ import { Configuration, OpenAIApi } from "openai";
 
 function AIChatPage() {
   const configuration = new Configuration({
-    apiKey: `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`,
+    apiKey: `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`,
   });
   const openai = new OpenAIApi(configuration);
 
@@ -25,9 +26,10 @@ function AIChatPage() {
     await openai
       .createCompletion({
         model: "text-davinci-003",
-        prompt: messageList
-          ? `안녕 내 이름은 ${myName}이고 너의 이름은 ${herName}이야. 우리 대화 할거야. 나에게 인사해주겠니, ${herName}야`
-          : currMessage,
+        prompt:
+          messageList.length < 1
+            ? `안녕 내 이름은 ${myName}이고 너의 이름은 ${herName}이야. 우리 대화 할거야. 나에게 인사해주겠니, ${herName}야`
+            : currMessage,
         temperature: 0.9,
         max_tokens: 150,
         top_p: 1,
@@ -37,6 +39,7 @@ function AIChatPage() {
       .then((result) => {
         const aiData = result.data;
         const aiCurrMessage = aiData.choices[0].text;
+
         const data = {
           name: herName,
           currMessage: aiCurrMessage,
@@ -48,33 +51,49 @@ function AIChatPage() {
             new Date(Date.now()).getSeconds(),
           whoSent: false,
         };
+
         setMessageList([...messageList, data]);
+        console.log("messageList", messageList);
       });
   };
+
   useEffect(() => {
     sendMessage();
   }, []);
 
-  const sendFunction = () => {
-    const data = {
-      name: myName,
-      currMessage: currMessage,
-      time:
-        new Date(Date.now()).getHours() +
-        ":" +
-        new Date(Date.now()).getMinutes() +
-        ":" +
-        new Date(Date.now()).getSeconds(),
-      whoSent: false,
-    };
-    setMessageList([...messageList, data]);
-    sendMessage();
+  useEffect(() => {
+    if (
+      messageList.length >= 2 &&
+      messageList[messageList.length - 1].whoSent === true
+    ) {
+      sendMessage();
+    }
     setCurrMessage("");
+  }, [messageList]);
+
+  const sendFunction = () => {
+    if (currMessage !== "") {
+      const data = {
+        name: myName,
+        currMessage: currMessage,
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes() +
+          ":" +
+          new Date(Date.now()).getSeconds(),
+        whoSent: true,
+      };
+
+      setMessageList([...messageList, data]);
+      console.log("messageList :>> ", messageList[messageList.length - 1]);
+    }
   };
 
   return (
     <div>
       <div>
+        <AiChatBoard />
         <input
           value={currMessage}
           type="text"
