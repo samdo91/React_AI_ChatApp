@@ -18,12 +18,13 @@ io.on("connection", (socket) => {
   console.log(`User: ${socket.id}에 연결됨`);
 
   socket.on("send_message", (data) => {
-    socket.to(data.herName).emit("receive_message", data);
+    console.log("data :>> ", data);
+    socket.to(`${data.roomNumber}`).emit("receive_message", data);
   });
 
   socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`Uesr ${socket.id} joined herName ${data}`);
+    console.log(`Uesr ${socket.id} joined roomNumber ${data}`);
   });
 });
 

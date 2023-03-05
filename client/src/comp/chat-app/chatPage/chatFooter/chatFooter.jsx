@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { myNames, herNames, messageLists } from "../../../store/global/index";
+import {
+  myNames,
+  herNames,
+  messageLists,
+  roomNumbers,
+} from "../../../store/global/index";
 import { useAtom } from "jotai";
+import styled from "@emotion/styled";
 
 function ChatFooter(props) {
   const [myName, setMyName] = useAtom(myNames);
-  const [herName, setHerName] = useAtom(herNames);
+  const [roomNumber, setRoomNumber] = useAtom(roomNumbers);
   const [messageList, setMessageList] = useAtom(messageLists);
   const { socket } = props;
   const [currMessage, setCurrMessage] = useState("");
@@ -12,7 +18,7 @@ function ChatFooter(props) {
     if (currMessage !== "") {
       const messageData = {
         myName: myName,
-        herName: herName,
+        roomNumber: roomNumber,
         currMessage: currMessage,
         time:
           new Date(Date.now()).getHours() +
@@ -33,8 +39,8 @@ function ChatFooter(props) {
   };
 
   return (
-    <div>
-      <input
+    <FooterBox>
+      <InputButton
         value={currMessage}
         type="text"
         placeholder="대화하고 싶은 내용을 적어주세요."
@@ -42,9 +48,36 @@ function ChatFooter(props) {
           setCurrMessage(e.target.value);
         }}
       />
-      <button onClick={sendFunction}> 보내기</button>
-    </div>
+      <Bottom onClick={sendFunction}> 보내기</Bottom>
+    </FooterBox>
   );
 }
 
 export default ChatFooter;
+
+const FooterBox = styled.div`
+  display: flex;
+`;
+const InputButton = styled.input`
+  border-radius: 15px;
+  margin-left: FooterBox px;
+  width: 400px;
+  height: 35px;
+  font-size: 20px;
+  &::placeholder {
+    padding: 15px;
+  }
+  border: 3px solid #28cf75;
+`;
+
+const Bottom = styled.button`
+  border-radius: 15px;
+  width: 175px;
+  height: 45px;
+  font-size: 30px;
+  margin-right: 10px
+  &::placeholder {
+    padding: 15px;
+  }
+  border: 3px solid #00a9fe;
+`;
