@@ -48,7 +48,7 @@ function ChatFooter(props) {
           setCurrMessage(e.target.value);
         }}
       />
-      <Bottom onClick={sendFunction}> 보내기</Bottom>
+      <Buttom onClick={sendFunction}> 보내기</Buttom>
     </FooterBox>
   );
 }
@@ -70,7 +70,7 @@ const InputButton = styled.input`
   border: 3px solid #28cf75;
 `;
 
-const Bottom = styled.button`
+const Buttom = styled.button`
   border-radius: 15px;
   width: 175px;
   height: 45px;

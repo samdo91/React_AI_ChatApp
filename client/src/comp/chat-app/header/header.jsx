@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import { chatSelsects } from "../../store/global";
+import { useAtom } from "jotai";
 
 function Header() {
+  const [chatSelsect] = useAtom(chatSelsects);
+
   return (
     <HeaderBox>
       <StyledLink to={`/`}>
-        <h1> ai chat</h1>
+        <h1>{chatSelsect}</h1>
       </StyledLink>
     </HeaderBox>
   );

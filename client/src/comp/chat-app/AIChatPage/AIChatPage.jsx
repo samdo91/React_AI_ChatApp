@@ -5,6 +5,8 @@ import { myNames, herNames, messageLists } from "../../store/global/index";
 import { useAtom } from "jotai";
 import { Configuration, OpenAIApi } from "openai";
 import AiChatBoard from "./AiChatBoard/AiChatBoard";
+import styled from "@emotion/styled";
+import Header from "../header/header";
 // const { Configuration, OpenAIApi } = require("openai");
 
 // import slack from "@slack/web-api";
@@ -92,20 +94,61 @@ function AIChatPage() {
 
   return (
     <div>
-      <div>
+      <Header />
+      <AIChatPageBox>
         <AiChatBoard />
-        <input
-          value={currMessage}
-          type="text"
-          placeholder="그녀에게 보낼 말"
-          onChange={(e) => {
-            setCurrMessage(e.target.value);
-          }}
-        />
-        <button onClick={sendFunction}>전송</button>
-      </div>
+        <FooterBox>
+          <InputButton
+            value={currMessage}
+            type="text"
+            placeholder="그녀에게 보낼 말"
+            onChange={(e) => {
+              setCurrMessage(e.target.value);
+            }}
+          />
+          <Buttom onClick={sendFunction}>전송</Buttom>
+        </FooterBox>
+      </AIChatPageBox>
     </div>
   );
 }
 
 export default AIChatPage;
+
+const AIChatPageBox = styled.div`
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  background-color: #a992fa;
+`;
+
+const FooterBox = styled.div`
+  display: flex;
+`;
+
+const InputButton = styled.input`
+  border-radius: 15px;
+  margin-left: FooterBox px;
+  width: 400px;
+  height: 35px;
+  font-size: 20px;
+  &::placeholder {
+    padding: 15px;
+  }
+  border: 3px solid #28cf75;
+`;
+
+const Buttom = styled.button`
+  border-radius: 15px;
+  width: 175px;
+  height: 45px;
+  font-size: 30px;
+  margin-right: 10px
+  &::placeholder {
+    padding: 15px;
+  }
+  border: 3px solid #00a9fe;
+`;

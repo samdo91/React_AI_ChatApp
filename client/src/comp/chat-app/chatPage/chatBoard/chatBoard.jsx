@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { messageLists } from "../../../store/global";
 import { useAtom } from "jotai";
 import styled from "@emotion/styled";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 function ChatBoard(props) {
   const [messageList, setMessageList] = useAtom(messageLists);
@@ -17,22 +18,24 @@ function ChatBoard(props) {
 
   return (
     <BoardBox>
-      {messageList.map((messageData) => {
-        return (
-          <MessageBox
-            whoSent={messageData.whoSent}
-            key={`${messageData.myName}${messageData.time}`}
-          >
-            <div>
-              <>{messageData.myName}</>
-            </div>
+      <ScrollToBottoms>
+        {messageList.map((messageData) => {
+          return (
+            <MessageBox
+              whoSent={messageData.whoSent}
+              key={`${messageData.myName}${messageData.time}`}
+            >
+              <div>
+                <>{messageData.myName}</>
+              </div>
 
-            <>{messageData.currMessage}</>
+              <>{messageData.currMessage}</>
 
-            <>{messageData.time}</>
-          </MessageBox>
-        );
-      })}
+              <>{messageData.time}</>
+            </MessageBox>
+          );
+        })}
+      </ScrollToBottoms>
     </BoardBox>
   );
 }
@@ -63,4 +66,9 @@ const MessageBox = styled.div`
   }
   border: 3px solid ${(props) => (props.whoSent ? "#ebf875" : "#a0edff")};
   margin: 10px;
+`;
+
+const ScrollToBottoms = styled(ScrollToBottom)`
+  width: 350px;
+  height: 500px;
 `;
