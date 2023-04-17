@@ -170,5 +170,65 @@
  part2. openai의 open api를 이용하여 인공지능 chatApp만들기
    
    1.무언가 잘못되었다!  
-    WebSocket를 이용하는 법을 알아낸 
+   
+   WebSocket를 이용하는 법을 알아낸 다음 나는 이것을 aiChat와 결합할 수 있을거라 생각했다.
+    하지만 openai에서 배포한 open api를 사용하는 것이기 때문에 내가 서버를 만들 필요가 없었다. 
     
+    !! 이것은 단순하게 Rest Api를 사용하는 것일 뿐이었다 !!
+     생각보다 ai를 쉽게 가져올 수 있었다.
+     
+     
+     이번에는 axios 대신 async await를 사용하였고 채팅 룸이 들어올때 지정한 ai 네임과 나의 이름을 인자로 보내준다.
+         prompt:
+          messageList.length < 1
+            ? `안녕 내 이름은 ${myName}이고 너의 이름은 ${herName}이야. 우리 대화 할거야. 나에게 인사해주겠니, ${herName}야`
+            : currMessage,
+ 
+     !!! 어 고장났다? !!!
+      openai에서 준 personal key는 깃허브에 push하면 에러가 난다. 아마 개인정보 보안 이슈인거 같다.
+      새로 personal key를 발급하여 교체해주니 다시 정상적으로 실행된다. 
+      엄청난 기술력이다. 이걸 어떻게 한 걸까. 검색해도 안나온다. 
+      
+      
+      
+      
+      
+
+2. css의 진화 @emotion/styled
+  emotion은 이전부터 css 라이브러리로 사용하였는데 emotion에는 크게 세 가지 사용법이 있고 나는 그중 @emotion/react를 사용하고 있다
+  
+  @emotion/react의 단점
+  emotion/react는 직접 태그나 클래스에 바로 적용한 방식을 쓰는데 이 방식으로 사용이 편하고 어떤 태그에 어떤 효과를 넣었는 지 바로 알 수 있어 좋지만 
+  react에 적용하니 코드가 너무 난잡해지는 느낌이 있고 리멘트 태그의 상속이 어떻게 되는 지 보기가 힘들었다. 애니메이션이라도 넣으려고 하면 태그 길이가 너무 길어져 코드가 한 눈에 보이지 않았다. 
+  즉 가독성이 떨어진다. 
+  
+  
+  
+  
+  그래서 이번에 적용한 방법이 emotion/styled는 간단하게 엘리먼트 태그를 컴포넌트화 시킨다고 생각하면 좋다. 컴포넌트로 만들어 그 자제체 css를 적용하는 방식이다.
+  
+    return( <div> 
+           <Div>blue</Div>
+           <Div pink>pink</Div>
+           <div> ) 
+    
+    const Div = styled.div`  color: ${props => (props.pink ? 'pink' : 'blue')};`
+
+    Div는 컴포넌트로 선언되었고 그 태그의 스타일은 div가 되는 것이다. 여기서 재미있는 것은 props를 이용하여 색 혹은 값을 변경 할 수 있다는 것이다. 
+    위의 Div는 컴포넌트에 선언된 props가 없기 때문에 삼항연자자에 의하여 false로 판단되어 blue가 되고
+    아래 Div 컴포넌트는 pink라는 props가 있기 때문에 색상이 pink가 된다. 
+    미리 만들어 놓은 컴포넌트에 props로  구성 요소의 스타일을 변경할 수 있다. 
+    
+    
+    
+   
+4. 무엇을 배웠는가 
+
+   1. express 이용하여 서버를 만드는 법과 서버 통신
+   2. WebSocket이란 무엇인가?
+   3. socket.io를 사용하여 WebSocket을 만들고 client에 적용하기 
+   4. CORS 정책이란? 
+   5. cors 라이브러리 사용법
+   6. emotion/styled로 스타일 주기
+      
+      
